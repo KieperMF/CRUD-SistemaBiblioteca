@@ -63,7 +63,7 @@ public class UsuarioDAO {
                 us.setId(rset.getInt("usuarioId"));
                 us.setNome(rset.getString("nome"));
                 us.setCpf(rset.getString("cpf"));
-                us.setLivroId(rset.getInt("fk_livro"));
+                us.setLivroNome(rset.getString("livroNome"));
                 usuarios.add(us);
             }
         }catch (Exception e){

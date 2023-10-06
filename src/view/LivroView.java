@@ -27,6 +27,7 @@ public class LivroView extends javax.swing.JFrame {
         DadosComboboxSecao();
         DadosComboboxSubsecao();
         ResgatarInnerJoin();
+        txtIdLivro.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -44,10 +45,7 @@ public class LivroView extends javax.swing.JFrame {
         btnCadastrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaLivro = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
         txtIdLivro = new javax.swing.JTextField();
-        btnSelecionarCampos = new javax.swing.JButton();
-        btnLimpar = new javax.swing.JButton();
         btnDeletar = new javax.swing.JButton();
         btnAtualizar = new javax.swing.JButton();
 
@@ -83,27 +81,16 @@ public class LivroView extends javax.swing.JFrame {
                 "ID Livro", "Titulo", "Autor", "Seção", "Subseção", "Data Cadastro"
             }
         ));
+        TabelaLivro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelaLivroMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TabelaLivro);
-
-        jLabel5.setText("ID:");
 
         txtIdLivro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIdLivroKeyTyped(evt);
-            }
-        });
-
-        btnSelecionarCampos.setText("Selecionar Campos");
-        btnSelecionarCampos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSelecionarCamposActionPerformed(evt);
-            }
-        });
-
-        btnLimpar.setText("Limpar Campos");
-        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparActionPerformed(evt);
             }
         });
 
@@ -128,7 +115,6 @@ public class LivroView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -142,8 +128,7 @@ public class LivroView extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(47, 47, 47)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtIdLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,35 +140,29 @@ public class LivroView extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(btnDeletar)
                                             .addComponent(btnAtualizar)
-                                            .addComponent(btnCadastrar))
-                                        .addGap(86, 86, 86)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnSelecionarCampos)
-                                            .addComponent(btnLimpar))))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)))
-                .addContainerGap())
+                                            .addComponent(btnCadastrar))))))
+                        .addContainerGap(365, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtIdLivro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtIdLivro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
-                        .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnSelecionarCampos)))
+                        .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLimpar)))
+                            .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(btnAtualizar)))
@@ -211,20 +190,12 @@ public class LivroView extends javax.swing.JFrame {
         Limpar();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void btnSelecionarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarCamposActionPerformed
-        Setar();
-    }//GEN-LAST:event_btnSelecionarCamposActionPerformed
-
     private void txtIdLivroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdLivroKeyTyped
        String id = "";
        if(!id.contains(evt.getKeyChar()+"")){
         evt.consume();
     }
     }//GEN-LAST:event_txtIdLivroKeyTyped
-
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        Limpar();
-    }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
        DeletarLivro();
@@ -237,6 +208,10 @@ public class LivroView extends javax.swing.JFrame {
         ResgatarInnerJoin();
         Limpar();
     }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void TabelaLivroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaLivroMouseClicked
+        Setar();
+    }//GEN-LAST:event_TabelaLivroMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -275,15 +250,12 @@ public class LivroView extends javax.swing.JFrame {
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnDeletar;
-    private javax.swing.JButton btnLimpar;
-    private javax.swing.JButton btnSelecionarCampos;
     private javax.swing.JComboBox<String> cbxSecao;
     private javax.swing.JComboBox<String> cbxSubsecao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtIdLivro;

@@ -21,6 +21,7 @@ public class UsuarioView extends javax.swing.JFrame {
     public UsuarioView() {
         initComponents();
         Exibir();
+        txtId.setVisible(false);
     }
 
     /**
@@ -39,10 +40,7 @@ public class UsuarioView extends javax.swing.JFrame {
         btnCadastrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaUsuario = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
-        btnSelecionar = new javax.swing.JButton();
-        btnLimpar = new javax.swing.JButton();
         btnDeletar = new javax.swing.JButton();
         btnAtualizar = new javax.swing.JButton();
 
@@ -76,27 +74,16 @@ public class UsuarioView extends javax.swing.JFrame {
                 "ID", "Nome", "CPF"
             }
         ));
+        tabelaUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaUsuarioMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaUsuario);
-
-        jLabel3.setText("ID:");
 
         txtId.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIdKeyTyped(evt);
-            }
-        });
-
-        btnSelecionar.setText("Selecionar Campos");
-        btnSelecionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSelecionarActionPerformed(evt);
-            }
-        });
-
-        btnLimpar.setText("Limpar");
-        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparActionPerformed(evt);
             }
         });
 
@@ -124,8 +111,7 @@ public class UsuarioView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -134,15 +120,11 @@ public class UsuarioView extends javax.swing.JFrame {
                                 .addComponent(txtCpf)))
                         .addGap(96, 96, 96)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnDeletar)
-                                    .addComponent(btnCadastrar))
-                                .addGap(57, 57, 57)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSelecionar)
-                                    .addComponent(btnLimpar)))
-                            .addComponent(btnAtualizar)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnDeletar)
+                                .addComponent(btnCadastrar))
+                            .addComponent(btnAtualizar))
+                        .addGap(189, 189, 189))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
@@ -151,16 +133,13 @@ public class UsuarioView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCadastrar)
-                    .addComponent(btnLimpar))
+                    .addComponent(btnCadastrar))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDeletar)
-                    .addComponent(btnSelecionar))
+                    .addComponent(btnDeletar))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -189,14 +168,6 @@ public class UsuarioView extends javax.swing.JFrame {
         Bloquear(evt);
     }//GEN-LAST:event_txtIdKeyTyped
 
-    private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
-        Setar();
-    }//GEN-LAST:event_btnSelecionarActionPerformed
-
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        Limpar();
-    }//GEN-LAST:event_btnLimparActionPerformed
-
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         Deletarusuario();
         Exibir();
@@ -208,6 +179,10 @@ public class UsuarioView extends javax.swing.JFrame {
         Exibir();
         Limpar();
     }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void tabelaUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaUsuarioMouseClicked
+       Setar();
+    }//GEN-LAST:event_tabelaUsuarioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -248,11 +223,8 @@ public class UsuarioView extends javax.swing.JFrame {
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnDeletar;
-    private javax.swing.JButton btnLimpar;
-    private javax.swing.JButton btnSelecionar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaUsuario;
     private javax.swing.JTextField txtCpf;
