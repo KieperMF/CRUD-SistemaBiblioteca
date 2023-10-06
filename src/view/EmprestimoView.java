@@ -188,7 +188,7 @@ public class EmprestimoView extends javax.swing.JFrame {
     
     public void CadastrarEmprestimo(){
         int Id = Integer.parseInt(txtIdUsuario.getText());
-        String usId = cbxLivros.getName();
+        String usId = cbxLivros.getSelectedItem().toString();
         UsuarioModel add = new UsuarioModel(Id, usId);
         usuarioDAO.CadastrarEmprestimo(add);
     }
