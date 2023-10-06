@@ -8,6 +8,7 @@ import DAO.LivroDAO;
 import DAO.UsuarioDAO;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.LivroModel;
 import model.UsuarioModel;
 
@@ -25,6 +26,7 @@ public class EmprestimoView extends javax.swing.JFrame {
         initComponents();
         DadosCombobox();
         txtIdUsuario.setVisible(false);
+        Exibir();
     }
 
     /**
@@ -44,6 +46,10 @@ public class EmprestimoView extends javax.swing.JFrame {
         txtNomeUsuario = new javax.swing.JTextField();
         txtCpf = new javax.swing.JTextField();
         btnEmprestimo = new javax.swing.JButton();
+        btnAtualizarEmprestimo = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaEmprestimo = new javax.swing.JTable();
+        btnDeletarEmprestimo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +68,38 @@ public class EmprestimoView extends javax.swing.JFrame {
             }
         });
 
+        btnAtualizarEmprestimo.setText("Atualizar Emprestimo");
+        btnAtualizarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarEmprestimoActionPerformed(evt);
+            }
+        });
+
+        tabelaEmprestimo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID Usuario", "Nome", "CPF", "Livro"
+            }
+        ));
+        tabelaEmprestimo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaEmprestimoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelaEmprestimo);
+
+        btnDeletarEmprestimo.setText("Deletar Emprestimo");
+        btnDeletarEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarEmprestimoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -69,6 +107,7 @@ public class EmprestimoView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(83, 83, 83)
@@ -85,7 +124,10 @@ public class EmprestimoView extends javax.swing.JFrame {
                                 .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(128, 128, 128)
-                        .addComponent(btnEmprestimo)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEmprestimo)
+                            .addComponent(btnAtualizarEmprestimo)
+                            .addComponent(btnDeletarEmprestimo))))
                 .addContainerGap(222, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -101,16 +143,20 @@ public class EmprestimoView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAtualizarEmprestimo))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeletarEmprestimo))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(cbxLivros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(347, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -118,7 +164,25 @@ public class EmprestimoView extends javax.swing.JFrame {
 
     private void btnEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmprestimoActionPerformed
         CadastrarEmprestimo();
+        Exibir();
+        Limpar();
     }//GEN-LAST:event_btnEmprestimoActionPerformed
+
+    private void tabelaEmprestimoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaEmprestimoMouseClicked
+        Setar();
+    }//GEN-LAST:event_tabelaEmprestimoMouseClicked
+
+    private void btnAtualizarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarEmprestimoActionPerformed
+        AtualizarEmprestimo();
+        Exibir();
+        Limpar();
+    }//GEN-LAST:event_btnAtualizarEmprestimoActionPerformed
+
+    private void btnDeletarEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarEmprestimoActionPerformed
+        DeletarEmprestimo();
+        Exibir();
+        Limpar();
+    }//GEN-LAST:event_btnDeletarEmprestimoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,11 +220,15 @@ public class EmprestimoView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizarEmprestimo;
+    private javax.swing.JButton btnDeletarEmprestimo;
     private javax.swing.JButton btnEmprestimo;
     private javax.swing.JComboBox<String> cbxLivros;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tabelaEmprestimo;
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtIdUsuario;
     private javax.swing.JTextField txtNomeUsuario;
@@ -185,4 +253,50 @@ public class EmprestimoView extends javax.swing.JFrame {
         usuarioDAO.CadastrarEmprestimo(add);
     }
     
+    public void AtualizarEmprestimo(){
+        int Id = Integer.parseInt(txtIdUsuario.getText());
+        String usId = cbxLivros.getSelectedItem().toString();
+        UsuarioModel add = new UsuarioModel(Id, usId);
+        usuarioDAO.AtualizarEmprestimo(add);
+    }
+    
+    public void DeletarEmprestimo(){
+        int id = Integer.parseInt(txtIdUsuario.getText());
+        usuarioDAO.DeletarEmprestimo(id);
+    }
+    
+    public void Limpar(){
+        txtIdUsuario.setText("");
+        txtCpf.setText("");
+        txtNomeUsuario.setText("");
+        cbxLivros.setSelectedIndex(0);
+    }
+    
+    public void Exibir(){
+        try {
+            DefaultTableModel model = (DefaultTableModel) tabelaEmprestimo.getModel();
+            model.setNumRows(0);
+           
+            UsuarioDAO dao = new UsuarioDAO();
+            
+            for(UsuarioModel usuario:dao.Mostrar()){
+                model.addRow(new Object[]{
+                    usuario.getId(),
+                    usuario.getNome(),
+                    usuario.getCpf(),
+                    usuario.getLivroNome()
+                });
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    public void Setar(){
+        int setar = tabelaEmprestimo.getSelectedRow();
+        
+        txtIdUsuario.setText(tabelaEmprestimo.getModel().getValueAt(setar, 0).toString());
+        txtNomeUsuario.setText(tabelaEmprestimo.getModel().getValueAt(setar, 1).toString());
+        txtCpf.setText(tabelaEmprestimo.getModel().getValueAt(setar, 2).toString());
+    }
 }

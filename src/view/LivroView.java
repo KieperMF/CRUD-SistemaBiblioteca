@@ -293,6 +293,8 @@ public class LivroView extends javax.swing.JFrame {
         txtIdLivro.setText("");
         txtTitulo.setText("");
         txtAutor.setText("");
+        cbxSecao.setSelectedIndex(0);
+        cbxSubsecao.setSelectedIndex(0);
     }
    
 

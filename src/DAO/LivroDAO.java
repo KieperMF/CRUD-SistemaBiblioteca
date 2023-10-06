@@ -163,7 +163,7 @@ public class LivroDAO {
             pstm.execute();
             JOptionPane.showMessageDialog(null,"Livro atualizado");
         }catch (Exception e){
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null,"Livro atualizado erro: "+e);
         }
     }
     

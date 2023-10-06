@@ -107,4 +107,39 @@ public class UsuarioDAO {
             System.out.println(e);
         }
     }
+    
+    public void AtualizarEmprestimo(UsuarioModel usuario){
+        String sql ="update usuario set livroNome=? where usuarioId=?";
+        Connection con = null;
+        PreparedStatement pstm = null;
+        
+        try {
+            con = Conexao.createConnection();
+            pstm = con.prepareStatement(sql);
+            
+            pstm.setString(1,usuario.getLivroNome());
+            pstm.setInt(2,usuario.getId());
+            pstm.execute();
+            JOptionPane.showMessageDialog(null,"Emprestimo Atualizado");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"emprestimo Atualizado erro:"+e);
+        }
+    }
+    
+    public void DeletarEmprestimo(int id){
+        String sql = "update usuario set livroNome=null where usuarioId=?";
+        Connection con = null;
+        PreparedStatement pstm = null;
+
+        try {
+            con = Conexao.createConnection();
+            pstm = con.prepareStatement(sql);
+
+            pstm.setInt(1,id);
+            pstm.execute();
+            JOptionPane.showMessageDialog(null,"Emprestimo deletado");
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"emprestimo Deletar erro:"+e);        
+        }
+    }
 }
