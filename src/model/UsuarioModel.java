@@ -12,6 +12,7 @@ public class UsuarioModel {
     int id;
     String nome;
     String cpf;
+    String livroNome;
     int livroId;
 
     public UsuarioModel(String nome, String cpf) {
@@ -32,16 +33,26 @@ public class UsuarioModel {
         this.cpf = cpf;
     }
 
-    public UsuarioModel(int id, int livroId) {
+    public UsuarioModel(int id, String livroNome) {
         this.id = id;
-        this.livroId = livroId;
+        this.livroNome = livroNome;
     }
+
+   
 
    
     
     
 
     public UsuarioModel() {
+    }
+
+    public String getLivroNome() {
+        return livroNome;
+    }
+
+    public void setLivroNome(String livroNome) {
+        this.livroNome = livroNome;
     }
     
     

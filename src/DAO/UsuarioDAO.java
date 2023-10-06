@@ -32,13 +32,13 @@ public class UsuarioDAO {
     }
     
      public void CadastrarEmprestimo(UsuarioModel usuario){
-        String sql = "insert into usuario (fk_livro) values (?) where usuario.usuarioId=?";
+        String sql = "update usuario set livroNome = ? where usuarioId=?";
         
         try {
             con = Conexao.createConnection();
             pstm = con.prepareStatement(sql);
             
-            pstm.setInt(1,usuario.getLivroId());
+            pstm.setString(1,usuario.getLivroNome());
             pstm.setInt(2,usuario.getId());
             pstm.execute();
             JOptionPane.showMessageDialog(null, "Emprestimo Cadastrado");
